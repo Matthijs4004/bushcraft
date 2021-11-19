@@ -6,12 +6,15 @@ sisaltouw = 0.58
 vijgenplakken = 1.24
 scheepsbiscuit = 2.67
 pemmican = 3.45
-
+rollen = ["Beer", "Vos", "Bever", "Uil"]
+geschikt = "Je bent in aanmerking gekomen voor de rol: "
+ngeschikt = "Helaas ben je niet geschikt voor de rol: "
 x = (244 / 12) * (dieselprijs) * 2 + 80
 noodvoedsel = (30 / 4 * pemmican) + (3 * 5 * vijgenplakken) + (scheepsbiscuit * 2)
 overig = (2 * firesteel) + (5 * lucifers) + (4 * vuursteen) + (10 * sisaltouw)
 materialen = noodvoedsel + overig
-
+totaalbedrag = materialen + x
+deel = totaalbedrag / 5
 
 print("Aanmeldformulier Bushcraft team\n")
 
@@ -27,17 +30,66 @@ mos = input("In welke richting groeit mos in Nederland? N/O/Z/W ")
 zuiveren = input("Heeft u kennis van het zuiveren van water? J/N ")
 
 if drukken > 100 and spijker > 10:
-    print("Je bent in aanmerking gekomen voor de rol 'Beer' in het team.")
+    sterk = True
+else:
+    sterk = False
 
 if iq > 130 and kast < 300:
-    print("Je bent in aanmerking gekomen voor de rol 'Vos' in het team")
+    slim = True
+else:
+    slim = False
 
 if sloot > 3 and vuur < 60:
-    print("Je bent in aanmerking gekomen voor de rol 'Bever' in het team")
+    handig = True
+else:
+    handig = False
 
 if paddestoelen > 10 and kruiden > 20 and mos == "W" and zuiveren == "J":
-    print("Je bent in aanmerking gekomen voor de rol 'Uil' in het team")
+    kennis = True
+else:
+    kennis = False
 
-print("\nMateriaalbedrag:", round(materialen, 2))
-print("Reisbedrag:", round(x, 2))
-print("Totaalbedrag:", round(x + materialen, 2))
+
+def beer():
+    if sterk == True:
+        print(geschikt, rollen[0])
+    else:
+        print(ngeschikt, rollen[0])
+def vos():
+    if slim == True:
+        print(geschikt, rollen[1])
+    else:
+        print(ngeschikt, rollen[1])
+def bever():
+    if handig == True:
+        print(geschikt, rollen[2])
+    else:
+        print(ngeschikt, rollen[2])
+def uil():
+    if kennis == True:
+        print(geschikt, rollen[3])
+    else:
+        print(ngeschikt, rollen[3])
+
+print("\nUitslag: ")
+beer()
+vos()
+bever()
+uil()
+
+print("\nTenslotte nog hebben we nog 1 vraag die bepaalt of u mee kan of niet.")
+def geldInleggen():
+    inleggen = int(input("\nHoeveel euro bent u bereid om in te leggen voor het bushcraften? "))
+    if inleggen > 45:
+        print("Gefeliciteerd. Als u voor 1 van de 4 rollen geschikt bent dan kunt u mee met bushcraften.")
+    elif inleggen < 45:
+        print("Het bedrag wat u bereid bent in te leggen is helaas te weinig en dus kunt u niet mee met het bushcraften.")
+    else:
+        print("Probeer op nieuw.")
+        geldInleggen()
+
+geldInleggen()
+
+# print("\nMateriaalbedrag:", round(materialen, 2))
+# print("Reisbedrag:", round(x, 2))
+# print("Totaalbedrag:", round(x + materialen, 2))
